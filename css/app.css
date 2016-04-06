@@ -1,0 +1,16 @@
+body {
+  margin-bottom: 50px;
+}
+
+@media (min-width: 767px) {
+  .site-content {
+    margin-top: 70px;
+  }
+}
+
+.footer-wrapper {
+  bottom: 0;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+}
