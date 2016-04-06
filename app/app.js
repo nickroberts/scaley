@@ -5,7 +5,6 @@ angular.module('app', [])
     var HID = require('node-hid');
     var VENDOR_ID = 3471;
     var DEVICE_ID = 512;
-    var usbDetect = require('usb-detection');
 
     _this.enableScale = enableScale;
     _this.getWeight = getWeight;
@@ -14,10 +13,14 @@ angular.module('app', [])
 
     function enableScale() {
       try {
-        _this.device = new HID.HID(VENDOR_ID, DEVICE_ID);
-        setupScaleListener();
+        if (HID.devices().length) {
+          _this.device = new HID.HID(VENDOR_ID, DEVICE_ID);
+          setupScaleListener();
+        } else {
+          throw 'No usb devices';
+        }
       } catch (e) {
-        console.error(e);
+        scaleErrorHandler(e);
       }
     }
 
@@ -29,11 +32,7 @@ angular.module('app', [])
           $scope.$applyAsync();
         }
       });
-      _this.device.on('error', function(data) {
-        _this.device.close();
-        _this.device = null;
-        $scope.$applyAsync();
-      });
+      _this.device.on('error', scaleErrorHandler);
     }
 
     function getWeight() {
@@ -42,13 +41,16 @@ angular.module('app', [])
 
     function activate() {
       enableScale();
-      usbDetect.on('add:' + VENDOR_ID + ':' + DEVICE_ID, function(device) {
-        _this.initializingScale = true;
-        $scope.$applyAsync();
-        $timeout(function() {
-          _this.initializingScale = false;
-          enableScale();
-        }, 5000);
-      });
+    }
+    
+    function scaleErrorHandler(e) {
+      console.error(e);
+      try {
+        _this.device.close();
+        _this.device = null;
+      } catch(e) {
+        _this.device = null;
+      }
+      $scope.$applyAsync();
     }
   });
