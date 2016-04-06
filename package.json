@@ -2,7 +2,7 @@
   "name": "scaley",
   "productName": "Scaley",
   "version": "0.0.0",
-  "description": "My beautiful app",
+  "description": "Electron usb scale test",
   "license": "MIT",
   "repository": "nickroberts/scaley",
   "author": {
@@ -12,12 +12,12 @@
   "electronVersion": "0.36.0",
   "scripts": {
     "test": "xo",
-    "start": "electron .",
+    "start": "electron main.js",
     "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion",
     "postinstall": "electron-rebuild --pre-gyp-fix --force"
   },
   "files": [
-    "index.js",
+    "main.js",
     "index.html",
     "app/app.js",
     "css/app.css"
