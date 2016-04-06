@@ -1,22 +1,30 @@
-'use strict';
 
-const HID = require('node-hid');
-const VENDOR_ID = 3471;
-const DEVICE_ID = 512;
+/* jshint esnext: true */
+(function() {
+  'use strict';
 
-angular.module('app', [])
-  .controller('AppController', function($scope, $timeout) {
-    let _this = this;
+  angular.module('app', [])
+    .controller('AppController', AppController);
 
-    _this.enableScale = enableScale;
-    _this.getWeight = getWeight;
+  function AppController($scope, $timeout) {
+    const HID = require('node-hid');
+    const VENDOR_ID = 3471;
+    const DEVICE_ID = 512;
+
+    let vm = this;
+    vm.device = null;
+    vm.weight = null;
+    vm.weightButton = null;
+
+    vm.enableScale = enableScale;
+    vm.getWeight = getWeight;
 
     activate();
 
     function enableScale() {
       try {
         if (HID.devices().length) {
-          _this.device = new HID.HID(VENDOR_ID, DEVICE_ID);
+          vm.device = new HID.HID(VENDOR_ID, DEVICE_ID);
           setupScaleListener();
         } else {
           throw 'No usb devices detected.';
@@ -27,18 +35,18 @@ angular.module('app', [])
     }
 
     function setupScaleListener() {
-      _this.device.on('data', function(data) {
+      vm.device.on('data', function(data) {
         let ounces = data.readInt16LE(4)/10;
-        if (_this.weight !== ounces) {
-          _this.weight = ounces;
+        if (vm.weight !== ounces) {
+          vm.weight = ounces;
           $scope.$applyAsync();
         }
       });
-      _this.device.on('error', scaleErrorHandler);
+      vm.device.on('error', scaleErrorHandler);
     }
 
     function getWeight() {
-      _this.weightButton = _this.weight;
+      vm.weightButton = vm.weight;
     }
 
     function activate() {
@@ -48,11 +56,12 @@ angular.module('app', [])
     function scaleErrorHandler(e) {
       console.error(e);
       try {
-        _this.device.close();
-        _this.device = null;
-      } catch(e) {
-        _this.device = null;
+        vm.device.close();
+        vm.device = null;
+      } catch(err) {
+        vm.device = null;
       }
       $scope.$applyAsync();
     }
-  });
+  }
+})();
