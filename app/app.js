@@ -1,10 +1,22 @@
-
 /* jshint esnext: true */
 (function() {
   'use strict';
 
-  angular.module('app', [])
+  angular.module('app', ['ngRoute'])
+    .config(config)
     .controller('AppController', AppController);
+
+  function config($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'app/home.html',
+        controller: 'AppController',
+        controllerAs: 'vm'
+      })
+      .otherwise({
+        redirectTo: '/'
+      });
+  }
 
   function AppController($scope, $timeout) {
     const HID = require('node-hid');
@@ -20,6 +32,10 @@
     vm.getWeight = getWeight;
 
     activate();
+
+    function activate() {
+      enableScale();
+    }
 
     function enableScale() {
       try {
@@ -49,16 +65,13 @@
       vm.weightButton = vm.weight;
     }
 
-    function activate() {
-      enableScale();
-    }
-
     function scaleErrorHandler(e) {
       console.error(e);
       try {
         vm.device.close();
         vm.device = null;
       } catch(err) {
+        console.error(err);
         vm.device = null;
       }
       $scope.$applyAsync();

@@ -8,7 +8,7 @@
     <link href="https://cdn.rawgit.com/PBGUX/designsystem/v2.6.0/dist/css/design_system.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
   </head>
-  <body class="site" data-ng-app="app" data-ng-controller="AppController as vm">
+  <body class="site" data-ng-app="app">
     <!-- header -->
     <header>
       <div class="navbar yamm navbar-default custom-navbar" role="navigation">
@@ -29,37 +29,7 @@
     <!-- body -->
     <div class="site-content spacer-top-sm">
       <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Auto Updating Weight</label>
-              <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="Ounces" data-ng-model="vm.weight">
-                <span class="input-group-addon">oz</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Set Weight With Button</label>
-              <div class="input-group input-group-lg">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" data-ng-click="vm.getWeight()" data-ng-disabled="!vm.device"><i class="fa fa-balance-scale"></i></button>
-                </span>
-                <input type="text" class="form-control" placeholder="Ounces" data-ng-model="vm.weightButton">
-                <span class="input-group-addon">oz</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row" data-ng-if="!vm.device">
-          <div class="col-md-12 has-error">
-            <p data-ng-if="!vm.initializingScale"><i class="fa fa-exclamation-triangle"></i> It looks like you do not have a scale plugged in. Please plug one in, then <button class="btn btn-primary btn-xs" type="button" data-ng-click="vm.enableScale()">enable it</button>.</p>
-            <p data-ng-if="vm.initializingScale"><i class="fa fa-circle-o-notch fa-spin"></i> Initializing scale...</p>
-          </div>
-        </div>
+        <data-ng-view></data-ng-view>
       </div>
     </div>
 
@@ -81,6 +51,7 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
     <script src="app/app.js"></script>
   </body>
 </html>
