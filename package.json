@@ -12,14 +12,14 @@
   "electronVersion": "0.36.0",
   "scripts": {
     "test": "xo",
-    "start": "electron main.js",
+    "start": "electron .",
     "build": "electron-packager . Scaley --out=dist --ignore='^/dist$' --prune --asar --platform=darwin --arch=x64 --version=0.36.0",
     "build-all": "electron-packager . Scaley --out=dist --ignore='^/dist$' --prune --asar --all --version=0.36.0",
     "build-win": "electron-packager . Scaley --out=dist --ignore='^/dist$' --prune --asar --platform=win32 --arch=x64 --version=0.36.0",
     "postinstall": "electron-rebuild --pre-gyp-fix --force"
   },
   "files": [
-    "main.js",
+    "index.js",
     "index.html",
     "app/app.js",
     "css/app.css"
