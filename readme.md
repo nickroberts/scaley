@@ -1,19 +1,22 @@
 # Scaley
 
+This is just a quick little test of Electron and its native usb integrations with a scale.
 
-## Dev
+_Note: the scale needs to be the PB usb scale with vendorId 3471 and productId 512._
+
+## Setup development environment
 
 ```
 $ npm install
 ```
 
-### Run
+### Run using electron
 
 ```
 $ npm start
 ```
 
-### Build
+### Build packaged versions
 
 ```
 $ npm run build
