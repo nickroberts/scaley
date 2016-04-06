@@ -18,8 +18,22 @@ $ npm start
 
 ### Build packaged versions
 
+#### Mac
+
 ```
 $ npm run build
+```
+
+#### Windows
+
+```
+$ npm run build-win
+```
+
+#### All
+
+```
+$ npm run build-all
 ```
 
 Builds the app for OS X, Linux, and Windows, using [electron-packager](https://github.com/maxogden/electron-packager).

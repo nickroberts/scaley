@@ -13,7 +13,9 @@
   "scripts": {
     "test": "xo",
     "start": "electron main.js",
-    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion",
+    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --platform=darwin --arch=x64 --version=$npm_package_electronVersion",
+    "build-all": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion",
+    "build-win": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --platform=win32 --arch=x64 --version=$npm_package_electronVersion",
     "postinstall": "electron-rebuild --pre-gyp-fix --force"
   },
   "files": [
