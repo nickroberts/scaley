@@ -1,0 +1,27 @@
+{
+  "name": "scaley",
+  "description": "Electron usb scale test",
+  "main": "index.js",
+  "authors": [],
+  "license": "MIT",
+  "keywords": [
+    "electron-app",
+    "electron"
+  ],
+  "homepage": "https://github.com/nickroberts/scaley",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "font-awesome": "^4.5.0",
+    "bootstrap": "^3.3.6",
+    "pb-design-system": "^2.6.0",
+    "angular-route": "^1.5.3"
+  }
+}

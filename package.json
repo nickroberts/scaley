@@ -33,6 +33,7 @@
     "node-hid": "^0.5.1"
   },
   "devDependencies": {
+    "bower": "^1.7.9",
     "electron-packager": "^5.0.0",
     "electron-prebuilt": "^0.36.0",
     "electron-rebuild": "^1.1.3",
