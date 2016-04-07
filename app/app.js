@@ -17,7 +17,7 @@
       });
   }
 
-  function AppController($scope, $timeout) {
+  function AppController($scope) {
     const HID = require('node-hid');
     const VENDOR_ID = 3471;
     const DEVICE_ID = 512;
@@ -64,13 +64,11 @@
       vm.weightButton = vm.weight;
     }
 
-    function scaleErrorHandler(e) {
-      console.error(e);
+    function scaleErrorHandler() {
       try {
         vm.device.close();
         vm.device = null;
       } catch(err) {
-        console.error(err);
         vm.device = null;
       }
       $scope.$applyAsync();
